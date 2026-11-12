@@ -4,10 +4,12 @@ RESTful API untuk mengelola data karya seni dan seniman menggunakan Node.js, Exp
 
 ## Identitas
 
-- Nama: Varrel Fernando
-- NIM: 2428240068
-- Kelas: SI5B
-- Mata Kuliah: Praktikum Pengembangan Aplikasi Web II
+| Informasi | Keterangan |
+|---|---|
+| Nama | Varrel Fernando |
+| NIM | 2428240068 |
+| Kelas | SI5B |
+| Mata Kuliah | Praktikum Pengembangan Aplikasi Web II |
 
 ## Teknologi
 
@@ -24,36 +26,81 @@ RESTful API untuk mengelola data karya seni dan seniman menggunakan Node.js, Exp
 - CRUD data seniman.
 - Filter karya berdasarkan media.
 - Sorting karya berdasarkan harga.
-- Relasi data karya dengan seniman menggunakan ObjectId.
-- Embedded document untuk ukuran karya.
+- Relasi karya seni dengan seniman menggunakan ObjectId.
+- Embedded document untuk menyimpan ukuran karya.
 - API Key authentication.
 - Centralized error handling.
 - Request logging.
 
+## Struktur Project
+
+```text
+uts-paw2-2428240068/
+├── controllers/
+│   ├── karyaController.js
+│   └── senimanController.js
+├── middlewares/
+│   ├── cekApiKey.js
+│   ├── errorHandler.js
+│   └── logger.js
+├── models/
+│   ├── karya.js
+│   └── seniman.js
+├── routes/
+│   ├── karyaRoutes.js
+│   └── senimanRoutes.js
+├── .gitignore
+├── app.js
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
 ## Instalasi
 
-1. Clone repository.
-2. Install dependencies:
+### 1. Clone Repository
 
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/varrelfernando/uts-paw2-2428240068.git
+```
 
-3. Buat file `.env`:
+### 2. Masuk ke Folder Project
 
-   ```env
-   API_KEY=galeriseni2026
-   PORT=3000
-   MONGODB_URI=mongodb://127.0.0.1:27017/uts_paw2
-   ```
+```bash
+cd uts-paw2-2428240068
+```
 
-4. Jalankan aplikasi:
+### 3. Install Dependencies
 
-   ```bash
-   npm run dev
-   ```
+```bash
+npm install
+```
 
-## Endpoint API
+### 4. Konfigurasi Environment
+
+Buat file `.env` pada folder utama project.
+
+```env
+API_KEY=galeriseni2026
+PORT=3000
+MONGODB_URI=mongodb://127.0.0.1:27017/uts_paw2
+```
+
+### 5. Jalankan Aplikasi
+
+```bash
+npm run dev
+```
+
+Server berjalan pada:
+
+```text
+http://localhost:3000
+```
+
+## API Endpoints
+
+### Karya
 
 | Method | Endpoint | Keterangan |
 |---|---|---|
@@ -62,29 +109,19 @@ RESTful API untuk mengelola data karya seni dan seniman menggunakan Node.js, Exp
 | POST | `/karya` | Menambahkan karya |
 | PUT | `/karya/:id` | Memperbarui karya |
 | DELETE | `/karya/:id` | Menghapus karya |
+
+### Seniman
+
+| Method | Endpoint | Keterangan |
+|---|---|---|
 | GET | `/seniman` | Menampilkan semua seniman |
 | POST | `/seniman` | Menambahkan seniman |
 
 ## Filter dan Sorting
 
-Contoh:
+API mendukung filter berdasarkan media dan pengurutan berdasarkan harga.
+
+Contoh request:
 
 ```http
-GET /karya?media=lukis&sort=harga
-```
-
-## API Key
-
-Untuk request POST, PUT, dan DELETE, gunakan header:
-
-```http
-x-api-key: galeriseni2026
-```
-
-## Database
-
-Nama database: `uts_paw2`
-
-Collections:
-- `karyas`
-- `senimen`
+GET
